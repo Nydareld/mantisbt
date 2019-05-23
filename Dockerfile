@@ -11,8 +11,8 @@ RUN set -xe \
     && docker-php-ext-install gd mbstring pdo_mysql mysqli soap ldap \
     && rm -rf /var/lib/apt/lists/*
 
-ENV MANTIS_VER 2.11.1
-ENV MANTIS_MD5 89c6f0d1a68968e43f8a45bd98b1ea00
+ENV MANTIS_VER 2.21.0
+ENV MANTIS_MD5 a558f1c396c6dbd494c11ad25b0b7b26
 ENV MANTIS_URL http://jaist.dl.sourceforge.net/project/mantisbt/mantis-stable/${MANTIS_VER}/mantisbt-${MANTIS_VER}.tar.gz
 ENV MANTIS_FILE mantisbt.tar.gz
 
@@ -25,7 +25,7 @@ RUN set -xe \
 
 RUN set -xe \
     && ln -sf /usr/share/zoneinfo/America/Argentina/Buenos_Aires /etc/localtime \
-    && echo 'date.timezone = "America/Argentina/Buenos_Aires"' > /usr/local/etc/php/php.ini
+    && echo 'date.timezone = "Europe/Paris"' > /usr/local/etc/php/php.ini
 
 ADD ./mantis-entrypoint /usr/local/bin/mantis-entrypoint
 ADD ./mantis-entrypoint-crontab /usr/local/bin/mantis-entrypoint-crontab
