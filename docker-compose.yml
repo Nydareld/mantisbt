@@ -6,17 +6,16 @@ services:
     build:
       context: ./
     environment:
-      MANTIS_ENABLE_ADMIN: 1
-      MANTIS_CONFIG: |
-        $$g_hostname = 'db';
-        $$g_db_type = 'mysqli';
-        $$g_database_name = 'mantis';
-        $$g_db_username = 'root';
-        $$g_db_password = 'mantis';
-        $$g_crypto_master_salt='s+MIBUM6GgKXGeN7h5MPkb2GNW52CLObSQOvYZxVHjfmGYzKCcBLlGduJi/6aeCgRo5zCTT5XhEP2OdyVAXC9w==';
-        $$g_log_level = LOG_EMAIL | LOG_EMAIL_RECIPIENT;
-        $$g_log_destination = '';
-        $$g_show_detailed_errors = ON;
+      - MANTIS_ENABLE_ADMIN=1
+      - MANTIS_CONFIG_HOSTNAME='db'
+      - MANTIS_CONFIG_DB_TYPE='mysqli'
+      - MANTIS_CONFIG_DATABASE_NAME='mantis'
+      - MANTIS_CONFIG_DB_USERNAME='root'
+      - MANTIS_CONFIG_DB_PASSWORD='mantis'
+      - MANTIS_CONFIG_CRYPTO_MASTER_SALT='+MIBUM6GgKXGeN7h5MPkb2GNW52CLObSQOvYZxVHjfmGYzKCcBLlGduJi/6aeCgRo5zCTT5XhEP2OdyVAXC9w=='
+      - MANTIS_CONFIG_LOG_LEVEL=LOG_EMAIL|LOG_EMAIL_RECIPIENT
+      - MANTIS_CONFIG_LOG_DESTINATION=''
+      - MANTIS_CONFIG_SHOW_DETAILED_ERRORS=ON
     ports:
       - "8080:80"
   db:

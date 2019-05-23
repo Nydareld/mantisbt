@@ -2,8 +2,14 @@
 set -eo pipefail
 
 echo '<?php ' > /var/www/html/config/config_inc.php
-echo -e $MANTIS_CONFIG >> /var/www/html/config/config_inc.php
-echo -e "\n?>" >> /var/www/html/config/config_inc.php
+while read -r VAL ; do
+    if [[ $VAL =~ ^MANTIS_CONFIG_* ]]; then
+        VARNAME=`echo "$VAL" | sed -r 's/^([^=]*)=(.*)$/\1/'`
+        VARVALUE=`echo "$VAL" | sed -r 's/^([^=]*)=(.*)$/\2/'`
+        PHPVARNAME=`echo "$VARNAME" | sed 's/MANTIS_CONFIG_/\$g_/g' | tr '[:upper:]' '[:lower:]'`
+        echo -e "$PHPVARNAME=$VARVALUE;" >> /var/www/html/config/config_inc.php
+    fi
+done < <(env)
 
 test -d admin && chmod -rx admin && mv admin .admin
 if [ ! -z "$MANTIS_ENABLE_ADMIN" ]; then
