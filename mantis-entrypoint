@@ -11,6 +11,8 @@ while read -r VAL ; do
     fi
 done < <(env)
 
+sed -i 's/g_phpmailer_method/g_phpMailer_method/g' /var/www/html/config/config_inc.php
+
 test -d admin && chmod -rx admin && mv admin .admin
 if [ ! -z "$MANTIS_ENABLE_ADMIN" ]; then
   test -d .admin && mv .admin admin && chmod +rx admin
