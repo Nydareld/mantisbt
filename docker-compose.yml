@@ -2,9 +2,10 @@ version: '2'
 volumes:
   mantis-db:
 services:
-  mantis:
+  mantisbt:
     build:
       context: ./
+    container_name: mantisbt
     environment:
       - MANTIS_ENABLE_ADMIN=1
       - MANTIS_CONFIG_HOSTNAME='db'
