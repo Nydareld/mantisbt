@@ -23,11 +23,15 @@ RUN set -xe \
     && rm ${MANTIS_FILE} \
     && chown -R www-data:www-data .
 
+COPY ./workflow.php .
+
+RUN chown -R www-data:www-data .
+
 RUN set -xe \
     && ln -sf /usr/share/zoneinfo/America/Argentina/Buenos_Aires /etc/localtime \
     && echo 'date.timezone = "Europe/Paris"' > /usr/local/etc/php/php.ini
 
-ADD ./mantis-entrypoint /usr/local/bin/mantis-entrypoint
-ADD ./mantis-entrypoint-crontab /usr/local/bin/mantis-entrypoint-crontab
+COPY ./mantis-entrypoint /usr/local/bin/mantis-entrypoint
+COPY ./mantis-entrypoint-crontab /usr/local/bin/mantis-entrypoint-crontab
 
 CMD ["mantis-entrypoint"]
