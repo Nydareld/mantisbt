@@ -18,4 +18,6 @@ if [ ! -z "$MANTIS_ENABLE_ADMIN" ]; then
   test -d .admin && mv .admin admin && chmod +rx admin
 fi
 
+php workflow.php
+
 apache2-foreground
